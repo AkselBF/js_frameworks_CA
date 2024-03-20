@@ -35,7 +35,7 @@ const Home: React.FC = () => {
     <div>
       <h2>Home Page</h2>
       {Array.isArray(products) && products.length > 0 ? (
-        <ul className="grid grid-cols-3 gap-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {products.map((product) => (
             <li key={product.id} className='m-5'>
               <Link to={`/product/${product.id}`}>
@@ -43,7 +43,7 @@ const Home: React.FC = () => {
                 <img src={product.image.url} alt={product.image.alt} 
                 className='rounded-lg h-48 m-auto' />
                 <p>{product.description}</p>
-                <p className='text-right'>{product.price}</p>
+                <p className='text-right'>{product.price + " kr"}</p>
               </Link>
             </li>
           ))}

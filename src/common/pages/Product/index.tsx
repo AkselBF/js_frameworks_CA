@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { url } from '../../constants/apiUrl';
+/*
+interface ProductProps {
+  addToCart: (product: any) => void; // Define addToCart function prop
+}*/
+interface ProductProps {
+  addToCart: (item: any) => void; // Add addToCart prop
+}
 
-const Product: React.FC = () => {
+const Product: React.FC<ProductProps> = ({ addToCart }) => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<any | null>(null);
 
@@ -25,8 +32,11 @@ const Product: React.FC = () => {
     fetchProductDetails();
   }, [id]);
 
-  const addToCart = () => {
-    console.log('Product added to cart:', product);
+  // Function to handle adding product to cart
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product); // Call addToCart function from props
+    }
   };
 
   return (
@@ -38,7 +48,7 @@ const Product: React.FC = () => {
           <img src={product.image.url} alt={product.image.alt} />
           <p>{product.description}</p>
           <p>{product.price}</p>
-          <button onClick={addToCart}>Add to Cart</button>
+          <button onClick={handleAddToCart}>Add to Cart</button>
         </div>
       ) : (
         <p>Loading...</p>

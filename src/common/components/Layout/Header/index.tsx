@@ -4,7 +4,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-gray-900 text-white p-4">
+    <header className="bg-gray-900 text-white p-4 sticky top-0">
       <nav className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-lg font-semibold">E-com</Link>
         <div className="flex items-center">
