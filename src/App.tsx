@@ -9,21 +9,26 @@ import Checkout from './common/pages/Checkout/index';
 import CheckoutSuccess from './common/pages/CheckoutSuccess/index';
 
 const App: React.FC = () => {
-  const [cart, setCart] = useState<any[]>([]); // Initialize cart state
+  const [cart, setCart] = useState<any[]>([]);
 
   // Function to add items to the cart
   const addToCart = (item: any) => {
     setCart([...cart, item]);
   };
 
+  // Function to clear the cart
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <Router>
-      <Layout>
+      <Layout cartItemCount={cart.length}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<Product addToCart={addToCart} />} />
           <Route path="/cart" element={<Cart cart={cart} />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout clearCart={clearCart} />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>

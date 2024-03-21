@@ -6,10 +6,14 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+interface LayoutProps {
+  cartItemCount: number; // Prop for cart item count
+}
+
+const Layout: React.FC<LayoutProps> = ({ children, cartItemCount }) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <Header cartItemCount={cartItemCount} />
       <main className="flex-grow w-[95%] m-auto">{children}</main>
       <Footer />
     </div>

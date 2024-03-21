@@ -5,6 +5,7 @@ import { url } from '../../constants/apiUrl'
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -25,25 +26,29 @@ const Home: React.FC = () => {
     fetchProducts();
   }, []);
 
-  /*
-  useEffect(() => {
-    console.log('Products state:', products);
-  }, [products]);
-  */
+  const filteredProducts = products.filter(product =>
+    product.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <div>
-      <h2>Home Page</h2>
-      {Array.isArray(products) && products.length > 0 ? (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {products.map((product) => (
-            <li key={product.id} className='m-5'>
+    <div className='justify-center text-center'>
+      <h1 className='text-3xl font-bold my-5'>Home Page</h1>
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="p-2 rounded border border-gray-300 mx-auto"
+      />
+      {filteredProducts.length > 0 ? (
+        <ul className="text-left grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {filteredProducts.map((product) => (
+            <li key={product.id} className="m-5">
               <Link to={`/product/${product.id}`}>
                 <h3>{product.title}</h3>
-                <img src={product.image.url} alt={product.image.alt} 
-                className='rounded-lg h-48 m-auto' />
+                <img src={product.image.url} alt={product.image.alt} className="rounded-lg h-48 m-auto" />
                 <p>{product.description}</p>
-                <p className='text-right'>{product.price + " kr"}</p>
+                <p className="text-right">{product.price + ' kr'}</p>
               </Link>
             </li>
           ))}

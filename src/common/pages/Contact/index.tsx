@@ -1,12 +1,140 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Grid, Button, TextField } from '@mui/material';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-const Home: React.FC = () => {
+interface ContactFormData {
+  fullName: string;
+  subject: string;
+  email: string;
+  body: string;
+}
+
+const schema = yup.object().shape({
+  fullName: yup.string().min(3, 'Full name must be at least 3 characters').required('Full name is required'),
+  subject: yup.string().min(3, 'Subject must be at least 3 characters').required('Subject is required'),
+  email: yup.string().email('Invalid email address').required('Email is required').matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'invalid email address'),
+  body: yup.string().min(3, 'Body must be at least 3 characters').required('Body is required'),
+});
+
+const Contact: React.FC = () => {
+  const { control, handleSubmit, formState: { errors }, formState } = useForm<ContactFormData>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
+
+  const onSubmit: SubmitHandler<ContactFormData> = (data) => {
+    console.log(data);
+    // Handle form submission
+  };
+
+  const isButtonDisabled = !formState.isValid;
+
   return (
     <div>
-      <h2>Contact Page</h2>
-      {/* Add content for the home page here */}
+      <h2 className="text-2xl font-bold mb-4">Contact Page</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Controller
+              name="fullName"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Full Name"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.fullName}
+                  helperText={errors.fullName?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Controller
+              name="subject"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Subject"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.subject}
+                  helperText={errors.subject?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Email"
+                  variant="outlined"
+                  fullWidth
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Controller
+              name="body"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="Body"
+                  variant="outlined"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  error={!!errors.body}
+                  helperText={errors.body?.message}
+                />
+              )}
+            />
+          </Grid>
+        </Grid>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={isButtonDisabled}
+          className={`py-3 px-6 rounded-md text-white font-semibold ${isButtonDisabled ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
+        >
+          Submit
+        </Button>
+      </form>
+      <Link to="/">Home</Link>
     </div>
   );
 };
 
-export default Home;
+export default Contact;
+
+/*
+import React from 'react';
+
+const Contact: React.FC = () => {
+  return (
+    <div>
+      <h2>Contact Page</h2>
+    </div>
+  );
+};
+
+export default Contact;
+*/
