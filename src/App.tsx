@@ -1,12 +1,40 @@
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './common/components/Layout/index';
+import Home from './common/pages/Home/index';
+import Product from './common/pages/Product/index';
+import Contact from './common/pages/Contact/index';
+import Cart from './common/pages/Cart/index';
+import Checkout from './common/pages/Checkout/index';
+import CheckoutSuccess from './common/pages/CheckoutSuccess/index';
 
-import './App.css'
+const App: React.FC = () => {
+  const [cart, setCart] = useState<any[]>([]);
 
-function App() {
+  // Function to add items to the cart
+  const addToCart = (item: any) => {
+    setCart([...cart, item]);
+  };
+
+  // Function to clear the cart
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
-    <>
-      
-    </>
-  )
-}
+    <Router>
+      <Layout cartItemCount={cart.length}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/product/:id" element={<Product addToCart={addToCart} />} />
+          <Route path="/cart" element={<Cart cart={cart} />} />
+          <Route path="/checkout" element={<Checkout clearCart={clearCart} />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Layout>
+    </Router>
+  );
+};
 
-export default App
+export default App;
