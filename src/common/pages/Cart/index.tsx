@@ -6,7 +6,7 @@ interface CartProps {
 }
 
 const Cart: React.FC<CartProps> = ({ cart }) => {
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+  const totalPrice = cart.reduce((total, item) => total + item.discountedPrice, 0).toFixed(2);
 
   return (
     <div>
@@ -16,7 +16,7 @@ const Cart: React.FC<CartProps> = ({ cart }) => {
           {cart.map((item, index) => (
             <li key={index}>
               <h3>{item.title}</h3>
-              <p>{item.price}</p>
+              <p>{item.discountedPrice}</p>
             </li>
           ))}
         </ul>

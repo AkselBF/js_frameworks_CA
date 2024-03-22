@@ -7,7 +7,7 @@ interface ProductProps {
   addToCart: (product: any) => void; // Define addToCart function prop
 }*/
 interface ProductProps {
-  addToCart: (item: any) => void; // Add addToCart prop
+  addToCart: (item: any) => void;
 }
 
 const Product: React.FC<ProductProps> = ({ addToCart }) => {
@@ -50,7 +50,7 @@ const Product: React.FC<ProductProps> = ({ addToCart }) => {
             className='w-[300px] mx-auto md:mx-10 rounded-lg' />
             <div className='relative text-white w-[80%] mx-auto'>
               <p className='mt-5 md:mt-0 mb-3'>{product.description}</p>
-              <p>Price: {product.price}kr</p>
+              <p>Price: {product.discountedPrice}kr</p>
               <p className='my-6'>
                 If the item seems appealing, click the add to cart to add it in the cart or purchase button to purchase this one item directly.
                 We hope you enjoy this purchase and any future ones you may have.
