@@ -25,7 +25,7 @@ const Cart: React.FC<CartProps> = ({ cart }) => {
         <h4>Total Price: {totalPrice}</h4>
         {cart.length > 0 ? (
           <Link to={'/checkout'}>
-            <button className='text-white bg-blue-700'>Checkout</button>
+            <button className='text-white bg-blue-700 py-2 px-8 rounded-full'>Checkout</button>
           </Link>
         ) : (
           <button disabled className='text-black bg-transparent cursor-not-allowed'>

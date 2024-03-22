@@ -34,9 +34,9 @@ const Contact: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Contact Page</h2>
+      <h1 className="text-center text-3xl font-bold my-5">Contact us</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} className='mb-6'>
           <Grid item xs={12}>
             <Controller
               name="fullName"
@@ -118,23 +118,11 @@ const Contact: React.FC = () => {
           Submit
         </Button>
       </form>
-      <Link to="/">Home</Link>
+      <Link to="/">
+        <button className='text-white my-6 bg-[#171717] py-1.5 w-[86px] rounded-md'>Home</button>
+      </Link>
     </div>
   );
 };
 
 export default Contact;
-
-/*
-import React from 'react';
-
-const Contact: React.FC = () => {
-  return (
-    <div>
-      <h2>Contact Page</h2>
-    </div>
-  );
-};
-
-export default Contact;
-*/

@@ -36,9 +36,9 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
 
   return (
     <div>
-      <h2>Checkout Page</h2>
+      <h1 className='text-center text-3xl font-bold my-5'>Checkout</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} className='mb-6'>
           <Grid item xs={12}>
             <Controller
               name="cardNumber"
@@ -91,7 +91,7 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
             />
           </Grid>
         </Grid>
-        <Link to={formState.isValid ? "/checkout/success" : "#"} onClick={clearCart} className='cursor-default'>
+        <Link to={formState.isValid ? "/checkout/success" : "#"} onClick={clearCart} className='cursor-default font-semibold'>
           <Button
             type="submit"
             variant="contained"
@@ -106,7 +106,9 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
           </Button>
         </Link>
       </form>
-      <Link to="/">Home</Link>
+      <Link to="/">
+        <button className='text-white bg-[#171717] py-1.5 w-[185px] rounded-md'>Back to home</button>
+      </Link>
     </div>
   );
 };

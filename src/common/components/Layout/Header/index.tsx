@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ cartItemCount }) => {
   return (
-    <header className="bg-gray-900 text-white p-4 sticky top-0">
+    <header className="bg-gray-900 text-white p-4 sticky top-0 z-50">
       <nav className="container mx-auto px-2 flex justify-between items-center">
         <Link to="/" className="text-lg font-semibold">E-com</Link>
         <div className="flex items-center">
