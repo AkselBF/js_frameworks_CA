@@ -16,6 +16,13 @@ const App: React.FC = () => {
     setCart([...cart, item]);
   };
 
+  // Function to remove item from cart
+  const removeFromCart = (index: number) => {
+    const newCart = [...cart];
+    newCart.splice(index, 1);
+    setCart(newCart);
+  };
+
   // Function to clear the cart
   const clearCart = () => {
     setCart([]);
@@ -25,9 +32,9 @@ const App: React.FC = () => {
     <Router>
       <Layout cartItemCount={cart.length}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home addToCart={addToCart} cart={cart} />} />
           <Route path="/product/:id" element={<Product addToCart={addToCart} />} />
-          <Route path="/cart" element={<Cart cart={cart} />} />
+          <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
           <Route path="/checkout" element={<Checkout clearCart={clearCart} />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/contact" element={<Contact />} />

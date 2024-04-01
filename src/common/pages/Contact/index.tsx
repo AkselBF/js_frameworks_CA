@@ -13,27 +13,27 @@ interface ContactFormData {
 }
 
 const schema = yup.object().shape({
-  fullName: yup.string().min(3, 'Full name must be at least 3 characters').required('Full name is required'),
-  subject: yup.string().min(3, 'Subject must be at least 3 characters').required('Subject is required'),
+  fullName: yup.string().required('Full name is required').min(3, 'Full name must be at least 3 characters'),
+  subject: yup.string().required('Subject is required').min(3, 'Subject must be at least 3 characters'),
   email: yup.string().email('Invalid email address').required('Email is required').matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'invalid email address'),
-  body: yup.string().min(3, 'Body must be at least 3 characters').required('Body is required'),
+  body: yup.string().required('Body is required').min(3, 'Body must be at least 3 characters'),
 });
 
 const Contact: React.FC = () => {
-  const { control, handleSubmit, formState: { errors }, formState } = useForm<ContactFormData>({
+  const { control, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm<ContactFormData>({
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<ContactFormData> = (data) => {
     console.log(data);
-    // Handle form submission
+    reset();
   };
 
-  const isButtonDisabled = !formState.isValid;
+  const isButtonDisabled = !isValid || isSubmitting;
 
   return (
-    <div>
+    <div className='px-3'>
       <h1 className="text-center text-3xl font-bold my-5">Contact us</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2} className='mb-6'>
@@ -108,19 +108,21 @@ const Contact: React.FC = () => {
             />
           </Grid>
         </Grid>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          disabled={isButtonDisabled}
-          className={`py-3 px-6 rounded-md text-white font-semibold ${isButtonDisabled ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
-        >
-          Submit
-        </Button>
+        <div className='flex flex-col md:flex-row-reverse justify-between'>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={isButtonDisabled}
+            className={`py-3 px-6 rounded-md text-white font-semibold w-[200px] ${isButtonDisabled ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
+          >
+            Submit
+          </Button>
+          <Link to="/">
+            <button className='text-white bg-[#171717] py-1.5 w-[200px] rounded-md my-3 md:my-0'>Back to home</button>
+          </Link>
+        </div>
       </form>
-      <Link to="/">
-        <button className='text-white my-6 bg-[#171717] py-1.5 w-[86px] rounded-md'>Home</button>
-      </Link>
     </div>
   );
 };
