@@ -35,10 +35,10 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
   const isButtonDisabled = !formState.isValid;
 
   return (
-    <div>
-      <h2>Checkout Page</h2>
+    <div className='px-3'>
+      <h1 className='text-center text-3xl font-bold my-5'>Checkout</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} className='mb-6'>
           <Grid item xs={12}>
             <Controller
               name="cardNumber"
@@ -91,22 +91,24 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
             />
           </Grid>
         </Grid>
-        <Link to={formState.isValid ? "/checkout/success" : "#"} onClick={clearCart} className='cursor-default'>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={isButtonDisabled}
-            style={{
-              backgroundColor: isButtonDisabled ? '#1976d250' : '#1976d2',
-              color: isButtonDisabled ? '#fff' : '#fff',
-            }}
-          >
-            Confirm Purchase
-          </Button>
-        </Link>
+        <div className='flex flex-col md:flex-row-reverse justify-between'>
+          <Link to={formState.isValid ? "/checkout/success" : "#"} onClick={clearCart} className='cursor-default'>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={isButtonDisabled}
+              className={`py-3 px-6 rounded-md text-white font-semibold w-[200px] ${isButtonDisabled ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
+            >
+              Confirm Purchase
+            </Button>
+          </Link>
+          <Link to="/">
+            <button className='text-white bg-[#171717] py-1.5 w-[200px] rounded-md my-3 md:my-0'>Back to home</button>
+          </Link>
+        </div>
+        
       </form>
-      <Link to="/">Home</Link>
     </div>
   );
 };
