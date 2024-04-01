@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
 
   return (
     <div className='px-3'>
-      <h1 className="text-center text-3xl font-bold my-5">Contact us</h1>
+      <h1 className="text-center text-3xl font-bold my-5 underline">Contact us</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2} className='mb-6'>
           <Grid item xs={12}>
@@ -114,7 +114,7 @@ const Contact: React.FC = () => {
             variant="contained"
             color="primary"
             disabled={isButtonDisabled}
-            className={`py-3 px-6 rounded-md text-white font-semibold w-[200px] ${isButtonDisabled ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
+            className={`py-3 px-6 rounded-md text-white font-semibold w-[200px] ${isButtonDisabled ? 'bg-gray-400' : 'bg-[#00B2FF] hover:bg-blue-600'}`}
           >
             Submit
           </Button>
