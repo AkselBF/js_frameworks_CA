@@ -54,7 +54,7 @@ const Home: React.FC<HomeProps> = ({ addToCart }) => {
             <li key={product.id} className="mt-5 p-3 mx-auto text-white bg-[#171717] w-[270px] sm:w-[300px] rounded-xl relative">
               <Link to={`/product/${product.id}`}>
                 <h2 className='text-lg text-[#00B2FF] line-clamp-1 font-semibold mt-1 mb-3 w-[80%] mx-auto'>{product.title}</h2>
-                <img src={product.image.url} alt={product.image.alt} className="rounded-lg h-48 mx-auto my-3 w-[80%]" />
+                <img src={product.image.url} alt={product.image.alt} className="rounded-lg h-48 mx-auto my-3" />
                 <p className='w-[80%] mx-auto mb-16 line-clamp-2'>{product.description}</p>
                 <p className="absolute font-semibold right-0 bottom-5 bg-[#FF8A00] rounded-l-md pr-9 pl-4 py-2 text-black">{product.price + ' kr'}</p>
               </Link>

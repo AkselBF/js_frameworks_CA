@@ -98,7 +98,7 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
               variant="contained"
               color="primary"
               disabled={isButtonDisabled}
-              className={`py-3 px-6 rounded-md text-white font-semibold w-[200px] ${isButtonDisabled ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'}`}
+              className={`py-3 px-6 rounded-md text-white font-semibold w-[200px] ${isButtonDisabled ? 'bg-gray-400' : 'bg-[#00B2FF] hover:bg-blue-600'}`}
             >
               Confirm Purchase
             </Button>
@@ -107,7 +107,6 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
             <button className='text-white bg-[#171717] py-1.5 w-[200px] rounded-md my-3 md:my-0'>Back to home</button>
           </Link>
         </div>
-        
       </form>
     </div>
   );
