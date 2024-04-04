@@ -36,17 +36,24 @@ const Product: React.FC<ProductProps> = ({ addToCart }) => {
     }
   };
 
+  const calculateDiscountPercentage = (price: number, discountedPrice: number) => {
+    const discount = price - discountedPrice;
+    const discountPercentage = ((discount / price) * 100);
+    return Math.round(discountPercentage) + '% off';
+  };
+
   return (
-    <div className='justify-center md:w-[90%]'>
+    <div className='justify-center md:w-[95%]'>
       {product ? (
-        <div className='mx-auto w-full lg:w-[90%]'>
-          <h1 className='text-3xl font-bold mx-5 lg:mx-auto my-5 underline'>{product.title}</h1>
-          <div className='bg-[#171717] px-5 pt-10 pb-10 md:pb-24 lg:pb-10 md:pr-10 md:pl-5 mx-auto flex flex-col md:flex-row md:rounded-r-xl'>
+        <div className='mx-auto my-3 w-full lg:w-[90%]'>
+          <h1 className='text-3xl italic font-bold mx-5 lg:mx-auto my-5'>{product.title}</h1>
+          <div className='bg-[#171717] px-5 pt-10 pb-10 md:pb-24 lg:pb-10 md:pr-10 md:pl-5 mx-auto flex flex-col md:flex-row md:rounded-r-xl lg:rounded-l-xl'>
             <img src={product.image.url} alt={product.image.alt}
             className='w-[300px] mx-auto md:mx-10 rounded-lg' />
             <div className='relative text-white w-[80%] mx-auto'>
               <p className='mt-5 md:mt-0 mb-3'>{product.description}</p>
-              <p className='text-[#FF8A00] font-semibold'>Discount: {product.discountedPrice}kr</p>
+              <p className='text-[#80A4FF] font-semibold'>Discount: {calculateDiscountPercentage(product.price, product.discountedPrice)}</p>
+              <p className='text-[#FF8A00] font-semibold'>Total: {product.discountedPrice}kr</p>
               <p className='mt-6 mb-12'>
                 If the item is to your liking, click the add to cart to add it in the cart or purchase button to purchase this one item directly.
               </p>

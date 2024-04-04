@@ -13,7 +13,29 @@ const App: React.FC = () => {
 
   // Function to add items to the cart
   const addToCart = (item: any) => {
-    setCart([...cart, item]);
+    // Check if the item already exists in the cart
+    const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+
+    if (existingItemIndex !== -1) {
+      // If the item exists, update its quantity
+      const updatedCart = [...cart];
+      updatedCart[existingItemIndex].quantity += 1;
+      setCart(updatedCart);
+    } else {
+      // If the item does not exist, add it to the cart with a quantity of 1
+      setCart([...cart, { ...item, quantity: 1 }]);
+    }
+  };
+
+  // Function to update item quantity in cart
+  const updateItemQuantity = (index: number, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(index);
+    } else {
+      const updatedCart = [...cart];
+      updatedCart[index].quantity = quantity;
+      setCart(updatedCart);
+    }
   };
 
   // Function to remove item from cart
@@ -30,11 +52,11 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <Layout cartItemCount={cart.length}>
+      <Layout cartItemCount={cart.reduce((total, item) => total + item.quantity, 0)}>
         <Routes>
           <Route path="/" element={<Home addToCart={addToCart} cart={cart} />} />
           <Route path="/product/:id" element={<Product addToCart={addToCart} />} />
-          <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
+          <Route path="/cart" element={<Cart cart={cart} updateItemQuantity={updateItemQuantity} removeFromCart={removeFromCart} />} />
           <Route path="/checkout" element={<Checkout clearCart={clearCart} />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/contact" element={<Contact />} />
