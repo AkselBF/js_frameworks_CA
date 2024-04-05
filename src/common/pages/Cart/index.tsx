@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../images/ecom_logo.png';
 import DeleteIcon from '@mui/icons-material/Delete';

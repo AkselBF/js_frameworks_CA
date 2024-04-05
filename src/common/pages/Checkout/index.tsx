@@ -52,6 +52,7 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
                   fullWidth
                   error={!!errors.cardNumber}
                   helperText={errors.cardNumber?.message}
+                  sx={{ height: 64, marginBottom: 1 }}
                 />
               )}
             />
@@ -69,6 +70,7 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
                   fullWidth
                   error={!!errors.expiryDate}
                   helperText={errors.expiryDate?.message}
+                  sx={{ height: 64, marginBottom: 1 }}
                 />
               )}
             />
@@ -86,6 +88,7 @@ const Checkout: React.FC<CheckoutProps> = ({ clearCart }) => {
                   fullWidth
                   error={!!errors.cvv}
                   helperText={errors.cvv?.message}
+                  sx={{ height: 64, marginBottom: 2 }}
                 />
               )}
             />
