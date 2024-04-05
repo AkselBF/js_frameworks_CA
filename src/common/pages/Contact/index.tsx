@@ -50,6 +50,7 @@ const Contact: React.FC = () => {
                   fullWidth
                   error={!!errors.fullName}
                   helperText={errors.fullName?.message}
+                  sx={{ height: 64, marginBottom: 1 }}
                 />
               )}
             />
@@ -67,6 +68,7 @@ const Contact: React.FC = () => {
                   fullWidth
                   error={!!errors.subject}
                   helperText={errors.subject?.message}
+                  sx={{ height: 64, marginBottom: 1 }}
                 />
               )}
             />
@@ -84,6 +86,7 @@ const Contact: React.FC = () => {
                   fullWidth
                   error={!!errors.email}
                   helperText={errors.email?.message}
+                  sx={{ height: 64, marginBottom: 1 }}
                 />
               )}
             />
@@ -103,6 +106,7 @@ const Contact: React.FC = () => {
                   rows={4}
                   error={!!errors.body}
                   helperText={errors.body?.message}
+                  sx={{ height: 64, marginBottom: 10 }}
                 />
               )}
             />
